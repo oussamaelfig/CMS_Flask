@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <title>My CMS - Search Results</title>
 </head>
 <body>
-$END$
+<h1>My CMS - Search Results</h1>
+
+<form action="/search" method="get">
+    <input type="text" name="q" value="{{ query }}">
+    <input type="submit" value="Search">
+</form>
+
+<h2>Search results:</h2>
+<ul>
+    {% for result in search_results %}
+        <li><a href="/article/{{ result[0] }}">{{ result[1] }}</a> - {{ result[2] }}</li>
+    {% endfor %}
+</ul>
 </body>
 </html>
