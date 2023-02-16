@@ -1,21 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>My CMS - Search Results</title>
-</head>
-<body>
-<h1>My CMS - Search Results</h1>
+{% extends "base.html" %}
 
-<form action="/search" method="get">
-    <input type="text" name="q" value="{{ query }}">
-    <input type="submit" value="Search">
-</form>
-
-<h2>Search results:</h2>
-<ul>
-    {% for result in search_results %}
-        <li><a href="/article/{{ result[0] }}">{{ result[1] }}</a> - {{ result[2] }}</li>
-    {% endfor %}
-</ul>
-</body>
-</html>
+{% block content %}
+    <h1>Search results for "{{ request.args.get('q') }}"</h1>
+    <ul>
+        {% for result in results %}
+            <li>
+                <a href="{{ url_for('article', identifier=result[2]) }}">{{ result[1] }}</a>
+                <p>{{ result[4] }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

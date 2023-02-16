@@ -1,27 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="container">
-        <div class="row mt-3">
-            <div class="col-12">
-                <form class="form-inline my-2 my-lg-0" action="{{ url_for('search') }}" method="get">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="q">
-                    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
-                </form>
-            </div>
+    <h1>Last 5 publications</h1>
+    <ul>
+        {% for publication in publications %}
+            <li>
+                <h3>{{ publication[1] }}</h3>
+                <p>{{ publication[4] }} - {{ publication[3] }}</p>
+                <p>{{ publication[5] }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h1>Search</h1>
+    <form action="{{ url_for('search') }}">
+        <div class="form-group">
+            <label for="search">Search:</label>
+            <input type="text" class="form-control" id="search" name="q" required>
         </div>
-        <div class="row mt-3">
-            {% for article in publications %}
-                <div class="col-12 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="{{ url_for('article', identifiant=article[0]) }}">{{ article[1] }}</a></h5>
-                            <h6 class="card-subtitle mb-2 text-muted">{{ article[3] }} - {{ article[4] }}</h6>
-                            <p class="card-text">{{ article[5] }}</p>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 {% endblock %}

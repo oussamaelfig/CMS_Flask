@@ -1,7 +1,7 @@
 import sqlite3
 
 # Connect to the database
-conn = sqlite3.connect('db/infoArticle.bd')
+conn = sqlite3.connect('db/infoArticle.db')
 c = conn.cursor()
 
 # Clear all the data in the table
