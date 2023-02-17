@@ -7,15 +7,23 @@
     {% endif %}
     <form method="post" action="{{ url_for('admin_new') }}">
         <div class="form-group">
-            <label for="titre">Title:</label>
+            <label for="titre">Titre:</label>
             <input type="text" class="form-control" id="titre" name="titre" value="{{ titre }}">
         </div>
         <div class="form-group">
-            <label for="paragraphe">Paragraph:</label>
+            <label for="identifiant">Identifiant:</label>
+            <input type="text" class="form-control" id="identifiant" name="identifiant" value="{{ identifiant }}">
+        </div>
+        <div class="form-group">
+            <label for="auteur">Auteur:</label>
+            <input type="text" class="form-control" id="auteur" name="auteur" value="{{ auteur }}">
+        </div>
+        <div class="form-group">
+            <label for="paragraphe">Paragraphe:</label>
             <textarea class="form-control" id="paragraphe" name="paragraphe">{{ paragraphe }}</textarea>
         </div>
         <div class="form-group">
-            <label for="date_publication">Publication Date (YYYY-MM-DD):</label>
+            <label for="date_publication">Date de publication (YYYY-MM-DD):</label>
             <input type="text" class="form-control" id="date_publication" name="date_publication"
                    value="{{ date_publication }}">
         </div>

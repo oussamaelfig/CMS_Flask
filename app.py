@@ -123,25 +123,30 @@ def admin_new():
 
         # Retrieve the form data
         titre = request.form['titre']
-        paragraphe = request.form['paragraphe']
+        identifiant = request.form['identifiant']
+        auteur = request.form['auteur']
         date_publication = request.form['date_publication']
+        paragraphe = request.form['paragraphe']
 
         # Validate the form data
-        if not titre or not paragraphe or not date_publication:
+        if not titre or not identifiant or not auteur or not paragraphe or not date_publication:
             error = 'All fields are required'
-            return render_template('admin_new.html', titre=titre, paragraphe=paragraphe,
+            return render_template('admin_new.html', titre=titre, identifiant=identifiant, auteur=auteur,
+                                   paragraphe=paragraphe,
                                    date_publication=date_publication, error=error)
 
         try:
-            datetime.strptime(date_publication, '%Y-%m-%d')
+            datetime.datetime.strptime(date_publication, '%Y-%m-%d')
         except ValueError:
             error = 'Invalid date format, please use YYYY-MM-DD'
-            return render_template('admin_new.html', titre=titre, paragraphe=paragraphe,
+            return render_template('admin_new.html', titre=titre, identifiant=identifiant, auteur=auteur,
+                                   paragraphe=paragraphe,
                                    date_publication=date_publication, error=error)
 
         # Insert the new article into the database
-        c.execute("INSERT INTO article (titre, paragraphe, date_publication) VALUES (?, ?, ?)",
-                  (titre, paragraphe, date_publication))
+        c.execute(
+            "INSERT INTO article (titre,identifiant, auteur, paragraphe, date_publication) VALUES (?, ?, ?, ?, ?)",
+            (titre, identifiant, auteur, paragraphe, date_publication))
         conn.commit()
 
         # Close the database connection
@@ -149,6 +154,8 @@ def admin_new():
 
         # Redirect to the admin page
         return redirect(url_for('admin'))
+
+    return render_template('admin_new.html')
 
 
 if __name__ == '__main__':
