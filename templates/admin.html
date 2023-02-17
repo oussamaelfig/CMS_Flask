@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Admin Page</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Date of Publication</th>
+            <th>Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article[1] }}</td>
+                <td>{{ article[3] }}</td>
+                <td><a href="{{ url_for('admin_edit', identifier=article[0]) }}">Edit</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('admin_new') }}" class="btn btn-primary">Create a New Article</a>
+{% endblock %}

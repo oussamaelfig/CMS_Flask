@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Article - My CMS{% endblock %}
+
+{% block content %}
+    <h1>Edit Article</h1>
+
+    <form method="post">
+        <div class="form-group">
+            <label for="titre">Title:</label>
+            <input type="text" class="form-control" id="titre" name="titre" value="{{ article.titre }}" required>
+        </div>
+        <div class="form-group">
+            <label for="paragraphe">Paragraph:</label>
+            <textarea class="form-control" id="paragraphe" name="paragraphe" rows="5" required>{{ article.paragraphe }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+{% endblock %}
