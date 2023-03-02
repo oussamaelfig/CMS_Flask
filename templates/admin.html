@@ -1,24 +1,88 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Admin Page</h1>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Date of Publication</th>
-            <th>Edit</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for article in articles %}
-            <tr>
-                <td>{{ article[1] }}</td>
-                <td>{{ article[3] }}</td>
-                <td><a href="{{ url_for('admin_edit', identifier=article[0]) }}">Edit</a></td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <a href="{{ url_for('admin_new') }}" class="btn btn-primary">Create a New Article</a>
+    <div class="container mt-5">
+        <h1 class="text-center mb-5">Admin Page</h1>
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="m-0">Article List</h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Date of Publication</th>
+                                <th>Edit</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for article in articles %}
+                                <tr>
+                                    <td>{{ article[1] }}</td>
+                                    <td>{{ article[4] }}</td>
+                                    <td><a href="{{ url_for('admin_edit', identifier=article[2]) }}"
+                                           class="btn btn-sm btn-primary">Edit</a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ url_for('admin_new') }}" class="btn btn-primary float-end">Create a New Article</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .card {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        .card-header h5 {
+            margin: 0;
+        }
+
+        .table th {
+            border-top: none;
+        }
+
+        .table td {
+            vertical-align: middle;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: rgba(0, 0, 0, 0.075);
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #0069d9;
+        }
+
+        .float-end {
+            float: right;
+        }
+
+        @media (max-width: 767px) {
+            .card {
+                margin-bottom: 1.5rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .card {
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
 {% endblock %}

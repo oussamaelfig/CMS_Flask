@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="infoArticle" uuid="e7463c50-a1c5-4db3-96ba-415aa99269fc">
+    <data-source source="LOCAL" name="infoArticle" uuid="7a08f4ff-4527-4156-80da-6fe6cd7baa15">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/infoArticle.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:C:\Users\User\Desktop\UQAM HIVER 2023\INF5190\Adavnced_WebDev\CMS_Flask\db\infoArticle.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
       <libraries>
         <library>

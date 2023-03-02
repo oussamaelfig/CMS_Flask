@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Search results for "{{ request.args.get('q') }}"</h1>
-    <ul>
+    <h1 class="mb-4">Search results for "{{ request.args.get('q') }}"</h1>
+    <div class="list-group">
         {% for result in results %}
-            <li>
-                <a href="{{ url_for('article', identifier=result[2]) }}">{{ result[1] }}</a>
-                <p>{{ result[4] }}</p>
-            </li>
+            <a href="{{ url_for('article', identifier=result[2]) }}" class="list-group-item list-group-item-action">
+                <h5 class="mb-1">{{ result[1] }}</h5>
+                <small class="text-muted">{{ result[4] }}</small>
+            </a>
         {% endfor %}
-    </ul>
+    </div>
 {% endblock %}

@@ -1,23 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Last 5 publications</h1>
-    <ul>
-        {% for publication in publications %}
-            <li>
-                <h3>{{ publication[1] }}</h3>
-                <p>{{ publication[4] }} - {{ publication[3] }}</p>
-                <p>{{ publication[5] }}</p>
-            </li>
-        {% endfor %}
-    </ul>
-
-    <h1>Search</h1>
+    <h1 class="mb-4">Search</h1>
     <form action="{{ url_for('search') }}">
         <div class="form-group">
-            <label for="search">Search:</label>
+            <label for="search" class="form-label">Search:</label>
             <input type="text" class="form-control" id="search" name="q" required>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary mt-2">Submit</button>
     </form>
+
+    <hr class="my-5">
+
+    <h1 class="mb-4">Last 5 publications</h1>
+    <div class="card-deck">
+        {% for publication in publications %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">{{ publication[1] }}</h5>
+                    <p class="card-text">{{ publication[5] }}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">{{ publication[4] }} - {{ publication[3] }}</small>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

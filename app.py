@@ -69,7 +69,7 @@ def admin():
     c = conn.cursor()
 
     # Retrieve all articles
-    c.execute("SELECT identifiant, titre, date_publication FROM article")
+    c.execute("SELECT * FROM article")
     articles = c.fetchall()
 
     # Close the database connection
@@ -96,6 +96,18 @@ def admin_edit(identifier):
         # Retrieve the form data
         titre = request.form['titre']
         paragraphe = request.form['paragraphe']
+
+        # Check the length of the fields
+        titre_len = len(titre)
+        paragraphe_len = len(paragraphe)
+
+        if titre_len > 100:
+            error = 'Titre field cannot have more than 100 characters'
+            return render_template('admin_edit.html', article=article, error=error)
+
+        if paragraphe_len > 500:
+            error = 'Paragraphe field cannot have more than 500 characters'
+            return render_template('admin_edit.html', article=article, error=error)
 
         # Update the article in the database
         c.execute("UPDATE article SET titre=?, paragraphe=? WHERE identifiant=?",
@@ -129,11 +141,26 @@ def admin_new():
         paragraphe = request.form['paragraphe']
 
         # Validate the form data
+        error = None
+
+        if len(titre) > 100:
+            error = 'Titre field cannot have more than 100 characters'
+
+        if len(identifiant) > 50:
+            error = 'Identifiant field cannot have more than 50 characters'
+
+        if len(auteur) > 100:
+            error = 'Auteur field cannot have more than 100 characters'
+
+        if len(paragraphe) > 500:
+            error = 'Paragraphe field cannot have more than 500 characters'
+
         if not titre or not identifiant or not auteur or not paragraphe or not date_publication:
             error = 'All fields are required'
+
+        if error is not None:
             return render_template('admin_new.html', titre=titre, identifiant=identifiant, auteur=auteur,
-                                   paragraphe=paragraphe,
-                                   date_publication=date_publication, error=error)
+                                   paragraphe=paragraphe, date_publication=date_publication, error=error)
 
         try:
             datetime.datetime.strptime(date_publication, '%Y-%m-%d')
@@ -143,7 +170,7 @@ def admin_new():
                                    paragraphe=paragraphe,
                                    date_publication=date_publication, error=error)
 
-        # Insert the new article into the database
+            # Insert the new article into the database
         c.execute(
             "INSERT INTO article (titre,identifiant, auteur, paragraphe, date_publication) VALUES (?, ?, ?, ?, ?)",
             (titre, identifiant, auteur, paragraphe, date_publication))
