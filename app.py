@@ -13,7 +13,10 @@ def home():
 
     # Retrieve the last 5 publications
     today = datetime.date.today().isoformat()
-    c.execute("SELECT * FROM article WHERE date_publication <= ? ORDER BY date_publication DESC LIMIT 5", (today,))
+    c.execute(
+        "SELECT * FROM article WHERE date_publication <= ? ORDER BY date_publication "
+        "DESC LIMIT 5",
+        (today,))
     publications = c.fetchall()
 
     # Close the database connection
@@ -32,8 +35,9 @@ def search():
     query = request.args.get('q')
 
     # Search for articles that contain the query in the title or paragraph
-    c.execute("SELECT * FROM article WHERE article.titre LIKE ? OR article.paragraphe LIKE ?",
-              ('%' + query + '%', '%' + query + '%'))
+    c.execute(
+        "SELECT * FROM article WHERE article.titre LIKE ? OR article.paragraphe LIKE ?",
+        ('%' + query + '%', '%' + query + '%'))
     results = c.fetchall()
 
     # Close the database connection
@@ -155,24 +159,29 @@ def admin_new():
         if len(paragraphe) > 500:
             error = 'Le champs Paragraphe ne doit pas depasser 500 caracteres'
 
-        if not titre or not identifiant or not auteur or not paragraphe or not date_publication:
+        if not titre or not identifiant or not auteur or not paragraphe or not \
+                date_publication:
             error = 'Tout les champs doivent être remplies'
 
         if error is not None:
-            return render_template('admin_new.html', titre=titre, identifiant=identifiant, auteur=auteur,
-                                   paragraphe=paragraphe, date_publication=date_publication, error=error)
+            return render_template('admin_new.html', titre=titre,
+                                   identifiant=identifiant, auteur=auteur,
+                                   paragraphe=paragraphe,
+                                   date_publication=date_publication, error=error)
 
         try:
             datetime.datetime.strptime(date_publication, '%Y-%m-%d')
         except ValueError:
             error = 'Format de date est invalide, veuillez utiliser le format YYYY-MM-DD'
-            return render_template('admin_new.html', titre=titre, identifiant=identifiant, auteur=auteur,
+            return render_template('admin_new.html', titre=titre,
+                                   identifiant=identifiant, auteur=auteur,
                                    paragraphe=paragraphe,
                                    date_publication=date_publication, error=error)
 
             # Insert the new article into the database
         c.execute(
-            "INSERT INTO article (titre,identifiant, auteur, paragraphe, date_publication) VALUES (?, ?, ?, ?, ?)",
+            "INSERT INTO article (titre,identifiant, auteur, paragraphe, "
+            "date_publication) VALUES (?, ?, ?, ?, ?)",
             (titre, identifiant, auteur, paragraphe, date_publication))
         conn.commit()
 
