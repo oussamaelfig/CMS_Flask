@@ -1,5 +1,5 @@
-#Code permanent : ELFO74030209
-#Nom et Prenom : OUSSAMA EL-FIGHA
+# Code permanent : ELFO74030209
+# Nom et Prenom : OUSSAMA EL-FIGHA
 
 from flask import Flask, render_template, request, redirect, url_for, abort
 import sqlite3
