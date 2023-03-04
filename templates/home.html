@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1 class="mb-4">Search</h1>
+    <h1 class="mb-4">Chercher</h1>
     <form action="{{ url_for('search') }}">
         <div class="form-group">
-            <label for="search" class="form-label">Search:</label>
+            <label for="search" class="form-label">Chercher:</label>
             <input type="text" class="form-control" id="search" name="q" required>
         </div>
-        <button type="submit" class="btn btn-primary mt-2">Submit</button>
+        <button type="submit" class="btn btn-primary mt-2">Soumettre</button>
     </form>
 
     <hr class="my-5">
 
-    <h1 class="mb-4">Last 5 publications</h1>
+    <h1 class="mb-4">5 derniers publications</h1>
     <div class="card-deck">
         {% for publication in publications %}
             <div class="card mb-4">

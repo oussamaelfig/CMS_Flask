@@ -2,20 +2,20 @@
 
 {% block content %}
     <div class="container mt-5">
-        <h1 class="text-center mb-5">Admin Page</h1>
+        <h1 class="text-center mb-5">Page admin</h1>
         <div class="row">
             <div class="col-lg-8 mx-auto">
                 <div class="card">
                     <div class="card-header bg-primary text-white">
-                        <h5 class="m-0">Article List</h5>
+                        <h5 class="m-0">Liste des articles</h5>
                     </div>
                     <div class="card-body">
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th>Title</th>
-                                <th>Date of Publication</th>
-                                <th>Edit</th>
+                                <th>Titre</th>
+                                <th>Date de publication</th>
+                                <th>Editer</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -31,7 +31,7 @@
                         </table>
                     </div>
                     <div class="card-footer">
-                        <a href="{{ url_for('admin_new') }}" class="btn btn-primary float-end">Create a New Article</a>
+                        <a href="{{ url_for('admin_new') }}" class="btn btn-primary float-end">Creer un nouveau article</a>
                     </div>
                 </div>
             </div>

@@ -102,11 +102,11 @@ def admin_edit(identifier):
         paragraphe_len = len(paragraphe)
 
         if titre_len > 100:
-            error = 'Titre field cannot have more than 100 characters'
+            error = 'Le champs Titre ne doit pas depasser 100 caracteres'
             return render_template('admin_edit.html', article=article, error=error)
 
         if paragraphe_len > 500:
-            error = 'Paragraphe field cannot have more than 500 characters'
+            error = 'Le champs Paragraphe ne doit pas depasser 500 caracteres'
             return render_template('admin_edit.html', article=article, error=error)
 
         # Update the article in the database
@@ -144,19 +144,19 @@ def admin_new():
         error = None
 
         if len(titre) > 100:
-            error = 'Titre field cannot have more than 100 characters'
+            error = 'Le champs Titre ne doit pas depasser 100 caracteres'
 
         if len(identifiant) > 50:
-            error = 'Identifiant field cannot have more than 50 characters'
+            error = 'Le champs Identifiant ne doit pas depasser 50 caracteres'
 
         if len(auteur) > 100:
-            error = 'Auteur field cannot have more than 100 characters'
+            error = 'Le champs Auteur ne doit pas depasser 100 caracteres'
 
         if len(paragraphe) > 500:
-            error = 'Paragraphe field cannot have more than 500 characters'
+            error = 'Le champs Paragraphe ne doit pas depasser 500 caracteres'
 
         if not titre or not identifiant or not auteur or not paragraphe or not date_publication:
-            error = 'All fields are required'
+            error = 'Tout les champs doivent être remplies'
 
         if error is not None:
             return render_template('admin_new.html', titre=titre, identifiant=identifiant, auteur=auteur,
@@ -165,7 +165,7 @@ def admin_new():
         try:
             datetime.datetime.strptime(date_publication, '%Y-%m-%d')
         except ValueError:
-            error = 'Invalid date format, please use YYYY-MM-DD'
+            error = 'Format de date est invalide, veuillez utiliser le format YYYY-MM-DD'
             return render_template('admin_new.html', titre=titre, identifiant=identifiant, auteur=auteur,
                                    paragraphe=paragraphe,
                                    date_publication=date_publication, error=error)
